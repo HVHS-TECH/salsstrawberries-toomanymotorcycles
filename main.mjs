@@ -7,7 +7,7 @@ window.fb_logout = fb_logout;
 window.fb_authCheck = fb_authCheck;
 
 function fb_submit() {
-    if (window.user.displayName == "Ben Britton") {
+    if (window.user.displayName == "Ben Britton") { // I'm evil.
         location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     }
     fb_write("/userData/"+window.user.uid+"/name",document.getElementById("name").value);
