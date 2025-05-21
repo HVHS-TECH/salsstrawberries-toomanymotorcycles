@@ -23,7 +23,7 @@ import { ref, query, orderByChild, limitToFirst, limitToLast, get, set, update, 
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
 /**************************************************************/
-export { fb_read, fb_readpath, fb_write, fb_update, fb_sortedread, fb_listen, fb_delete};
+export { fb_read, fb_readpath, fb_write, fb_update, fb_sortedread, fb_listen, fb_delete, randomInteger};
 
 
 function randomInteger(digits) {
