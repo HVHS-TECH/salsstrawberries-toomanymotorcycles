@@ -66,6 +66,7 @@ function fb_favourites() {
             document.getElementById("topFavouritesTitle").className = "hide";
             document.getElementById("topFavourites").className = "hide";
             document.getElementById("errorBox").className = "";
+            document.getElementById("errorBox").innerHTML = `<hr><p>Failed to retrieve information.</p>${error}<hr>`;
         }
         
     })
