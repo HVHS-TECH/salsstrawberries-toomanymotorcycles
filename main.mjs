@@ -6,6 +6,14 @@ window.fb_login = fb_login;
 window.fb_logout = fb_logout;
 window.fb_authCheck = fb_authCheck;
 
+function frequencyMapWithObject(arr) {
+  const frequency = {};
+  for (const element of arr) {
+    frequency[element] = (frequency[element] || 0) + 1;
+  }
+  return frequency;
+}
+
 function fb_submit() {
     if (window.user.displayName == "Ben Britton") { // I'm evil.
         location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ';
@@ -29,7 +37,37 @@ function fb_submit() {
 
 function fb_favourites() {
     fb_read_passOn("/publicData/favouriteFruits",(value) => {
-        console.log(Object.values(value));
+        try {
+            var array = frequencyMapWithObject(Object.values(value));
+            let sortable = [];
+            for (var entry in array) {
+                if (entry = "Warning: if anyone deletes this, they will be fired.") {
+                    sortable.push([entry, array[entry]]);
+                }
+            }
+            sortable.sort(function(a, b) {
+                return b[1] - a[1];
+            });
+            try {
+               document.getElementById("topFavourites").innerHTML = `
+                #1 - ${sortable[0][0]},<br>
+                #2 - ${sortable[1][0]},<br>
+                #3 - ${sortable[2][0]},<br>
+                #4 - ${sortable[3][0]},<br>
+                #5 - ${sortable[4][0]},<br>
+                `;
+            } catch (error) {
+                document.getElementById("topFavourites").innerHTML = "Not enough data."
+            }
+            document.getElementById("topFavouritesTitle").className = "";
+            document.getElementById("topFavourites").className = "";
+            document.getElementById("errorBox").className = "hide";
+        } catch (error) {
+            document.getElementById("topFavouritesTitle").className = "hide";
+            document.getElementById("topFavourites").className = "hide";
+            document.getElementById("errorBox").className = "";
+        }
+        
     })
 }
 
