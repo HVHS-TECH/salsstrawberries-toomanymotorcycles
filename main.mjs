@@ -50,7 +50,7 @@ function fb_favourites() {
             });
             console.log(sortable)
             try {
-               document.getElementById("topFavourites").innerHTML = `
+                document.getElementById("topFavourites").innerHTML = `
                 #1 - ${sortable[0][0]},<br>
                 #2 - ${sortable[1][0]},<br>
                 #3 - ${sortable[2][0]},<br>
