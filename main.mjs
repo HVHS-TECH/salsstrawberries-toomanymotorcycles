@@ -41,13 +41,14 @@ function fb_favourites() {
             var array = frequencyMapWithObject(Object.values(value));
             let sortable = [];
             for (var entry in array) {
-                if (entry = "Warning: if anyone deletes this, they will be fired.") {
+                if (entry != "Warning: if anyone deletes this, they will be fired.") {
                     sortable.push([entry, array[entry]]);
                 }
             }
             sortable.sort(function(a, b) {
                 return b[1] - a[1];
             });
+            console.log(sortable)
             try {
                document.getElementById("topFavourites").innerHTML = `
                 #1 - ${sortable[0][0]},<br>
