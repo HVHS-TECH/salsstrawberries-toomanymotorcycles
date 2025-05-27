@@ -23,7 +23,7 @@ import { ref, query, orderByChild, limitToFirst, limitToLast, get, set, update, 
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
 /**************************************************************/
-export { fb_read, fb_readpath, fb_write, fb_update, fb_sortedread, fb_listen, fb_delete, randomInteger};
+export { fb_read, fb_read_passOn, fb_readpath, fb_write, fb_update, fb_sortedread, fb_listen, fb_delete, randomInteger};
 
 
 function randomInteger(digits) {
@@ -51,7 +51,38 @@ function fb_read(path) {
         if (fb_data != null) {
             console.log(fb_data);
             //document.getElementById("p_fbReadRec").innerHTML = fb_data;
-            return fb_data;
+        } else {
+            console.warn("The data at \'" + ref + "\' was not found.");
+        }
+
+    }).catch((error) => {
+        console.warn(error.code + " - " + error.message);
+        if (error.message = "Permission denied.") {
+            console.warn("PERMISSION DENIED - you do not have permission to read the database at the queried location.")
+            //document.getElementById("p_fbReadRec").innerHTML = "Permission denied.";
+            //alert("PERMISSION DENIED - you do not have permission to read the database at the queried location.")
+        } else {
+            console.warn(error.code + " - " + error.message);
+        }
+    });
+};
+
+function fb_read_passOn(path,nextFunction) {
+    console.log('%c fb_read(): ',
+        'color: ' + COL_C + '; background-color: ' + COL_B + ';'
+    );
+    if (window.user != null) {
+        console.log("Attempting to read value as user \"" + user.displayName +"\"") ;   
+    } else {
+        console.log("Attempting to read value as anonymous user");
+    }
+    const reference = ref(FB_DATABASE, path);
+    get(reference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+            console.log(fb_data);
+            //document.getElementById("p_fbReadRec").innerHTML = fb_data;
+            nextFunction(fb_data);
         } else {
             console.warn("The data at \'" + ref + "\' was not found.");
         }

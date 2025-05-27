@@ -58,6 +58,11 @@ button:hover {
   font-style: italic;
 }
 
+#errorBox {
+  background-color: #ffb0b0;
+  text-align: center;
+}
+
 .hide {
   display: none;
 }

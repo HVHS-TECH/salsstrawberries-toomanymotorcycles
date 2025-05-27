@@ -1,6 +1,6 @@
 import {fb_initialise} from "./fb_io.mjs";
 import {fb_login,fb_logout,fb_authCheck} from "./fb_authhandler.mjs";
-import {fb_write,randomInteger} from "./fb_readwrite.mjs";
+import {fb_read, fb_read_passOn, fb_write,randomInteger} from "./fb_readwrite.mjs";
 
 window.fb_login = fb_login;
 window.fb_logout = fb_logout;
@@ -13,6 +13,7 @@ function fb_submit() {
     fb_write("/userData/"+window.user.uid+"/name",document.getElementById("name").value);
     fb_write("/userData/"+window.user.uid+"/favouriteFruit",document.getElementById("favoriteFruit").value);
     fb_write("/userData/"+window.user.uid+"/servingsPerWeek",document.getElementById("fruitQuantity").value);
+    fb_write(`/publicData/favouriteFruits/${randomInteger(10)}`,document.getElementById("favoriteFruit").value);
     document.getElementById("fruitForm").className = "hide";
     document.getElementById("submitButton").className = "hide";
     document.getElementById("loginButton").className = "hide";
@@ -24,6 +25,12 @@ function fb_submit() {
     Nga mihi nui,<br>
     The team at Sal's Strawberry Saloon (and other fruit products).
     `;
+}
+
+function fb_favourites() {
+    fb_read_passOn("/publicData/favouriteFruits",(value) => {
+        console.log(Object.values(value));
+    })
 }
 
 window.fb_submit = fb_submit;
@@ -40,3 +47,4 @@ fb_initialise({
 })
 
 fb_authCheck()
+setInterval(fb_favourites,1000);
