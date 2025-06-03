@@ -18,10 +18,12 @@ function fb_submit() {
     if (window.user.displayName == "Ben Britton") { // I'm evil.
         location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ';
     }
+    var linkedNumber = randomInteger(10);
     fb_write("/userData/"+window.user.uid+"/name",document.getElementById("name").value);
     fb_write("/userData/"+window.user.uid+"/favouriteFruit",document.getElementById("favoriteFruit").value);
     fb_write("/userData/"+window.user.uid+"/servingsPerWeek",document.getElementById("fruitQuantity").value);
-    fb_write(`/publicData/favouriteFruits/${randomInteger(10)}`,document.getElementById("favoriteFruit").value);
+    fb_write("/userData/"+window.user.uid+"/linkedNumber",linkedNumber);
+    fb_write(`/publicData/favouriteFruits/${linkedNumber}`,document.getElementById("favoriteFruit").value);
     document.getElementById("fruitForm").className = "hide";
     document.getElementById("submitButton").className = "hide";
     document.getElementById("loginButton").className = "hide";
