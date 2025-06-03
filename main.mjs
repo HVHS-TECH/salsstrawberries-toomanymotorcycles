@@ -51,11 +51,11 @@ function fb_favourites() {
             console.log(sortable)
             try {
                 document.getElementById("topFavourites").innerHTML = `
-                #1 - ${sortable[0][0]},<br>
-                #2 - ${sortable[1][0]},<br>
-                #3 - ${sortable[2][0]},<br>
-                #4 - ${sortable[3][0]},<br>
-                #5 - ${sortable[4][0]},<br>
+                #1 - ${sortable[0][0]} (x${sortable[0][1]}),<br>
+                #2 - ${sortable[1][0]} (x${sortable[1][1]}),<br>
+                #3 - ${sortable[2][0]} (x${sortable[2][1]}),<br>
+                #4 - ${sortable[3][0]} (x${sortable[3][1]}),<br>
+                #5 - ${sortable[4][0]} (x${sortable[4][1]})<br>
                 `;
             } catch (error) {
                 document.getElementById("topFavourites").innerHTML = "Not enough data."
